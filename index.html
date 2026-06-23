@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>体験塾 議事録一覧</title>
+  <style>
+    :root {
+      --green-dark:  #2d6a4f;
+      --green-mid:   #52b788;
+      --green-light: #d8f3dc;
+      --green-pale:  #f0faf3;
+      --earth:       #6b4c2a;
+      --earth-light: #f5ede3;
+      --sky:         #2563a8;
+      --sky-light:   #e8f0fb;
+      --sun:         #e67e22;
+      --sun-light:   #fef3e2;
+      --text:        #1a1a1a;
+      --text-sub:    #555;
+      --border:      #c8e6c9;
+      --white:       #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+      background: var(--green-pale);
+      color: var(--text);
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    /* ヘッダー */
+    header {
+      background: linear-gradient(135deg, var(--green-dark), var(--green-mid));
+      color: white;
+      padding: 48px 32px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '🌱';
+      position: absolute;
+      left: 40px;
+      top: 24px;
+      font-size: 72px;
+      opacity: 0.15;
+    }
+    header::after {
+      content: '🌿';
+      position: absolute;
+      right: 40px;
+      bottom: 16px;
+      font-size: 72px;
+      opacity: 0.15;
+    }
+    header h1 {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+    header p {
+      font-size: 14px;
+      opacity: 0.85;
+    }
+
+    /* メイン */
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    /* 説明文 */
+    .intro {
+      background: white;
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 32px;
+      border: 1px solid var(--border);
+      font-size: 14px;
+      color: var(--text-sub);
+      line-height: 1.9;
+    }
+    .intro strong {
+      color: var(--green-dark);
+    }
+
+    /* 年ごとのブロック */
+    .year-block {
+      margin-bottom: 40px;
+    }
+
+    .year-label {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--green-dark);
+      border-bottom: 2px solid var(--green-mid);
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* 議事録カード */
+    .minutes-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .minutes-card {
+      background: white;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-decoration: none;
+      color: var(--text);
+      transition: box-shadow 0.2s, transform 0.2s;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+    .minutes-card:hover {
+      box-shadow: 0 6px 18px rgba(45,106,79,0.15);
+      transform: translateY(-2px);
+    }
+
+    .card-date {
+      background: var(--green-light);
+      color: var(--green-dark);
+      border-radius: 8px;
+      padding: 10px 14px;
+      text-align: center;
+      min-width: 72px;
+      flex-shrink: 0;
+    }
+    .card-date .month {
+      font-size: 12px;
+      font-weight: 700;
+      opacity: 0.8;
+    }
+    .card-date .day {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .card-body {
+      flex: 1;
+    }
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--green-dark);
+      margin-bottom: 4px;
+    }
+    .card-meta {
+      font-size: 12px;
+      color: var(--text-sub);
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .card-arrow {
+      color: var(--green-mid);
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    /* タグ */
+    .tag {
+      display: inline-block;
+      background: var(--sky-light);
+      color: var(--sky);
+      border-radius: 4px;
+      padding: 1px 7px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .tag.new {
+      background: var(--sun-light);
+      color: var(--sun);
+    }
+
+    /* 追加ガイド */
+    .guide-box {
+      background: var(--earth-light);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-top: 40px;
+      border: 1px solid #e0cfc0;
+    }
+    .guide-box h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--earth);
+      margin-bottom: 10px;
+    }
+    .guide-box ol {
+      font-size: 13px;
+      color: var(--text-sub);
+      padding-left: 18px;
+      line-height: 2;
+    }
+    .guide-box code {
+      background: white;
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-family: monospace;
+      font-size: 12px;
+      color: var(--earth);
+      border: 1px solid #e0cfc0;
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 20px; }
+      .card-date { min-width: 60px; padding: 8px 10px; }
+      .card-date .day { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🌿 体験塾 議事録一覧</h1>
+  <p>毎月第2・第4火曜日 定例ミーティングの記録</p>
+</header>
+
+<main>
+
+  <div class="intro">
+    <strong>このページについて</strong><br>
+    体験塾の運営ミーティングの議事録をまとめています。<br>
+    読みたい回をタップすると、その日の議事録が開きます。
+  </div>
+
+  <!-- 2026年 -->
+  <div class="year-block">
+    <div class="year-label">📅 2026年</div>
+    <div class="minutes-list">
+
+      <!-- 議事録を追加するときはここにコピーして増やす -->
+
+      <a class="minutes-card" href="gijiroku/2026-06-09.html">
+        <div class="card-date">
+          <div class="month">6月</div>
+          <div class="day">9</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">第1回 運営ミーティング</div>
+          <div class="card-meta">
+            <span>火曜日</span>
+            <span>19:00〜</span>
+            <span class="tag new">NEW</span>
+          </div>
+        </div>
+        <div class="card-arrow">›</div>
+      </a>
+
+      <!-- 次回以降はここに追加 -->
+      <!--
+      <a class="minutes-card" href="gijiroku/2026-06-23.html">
+        <div class="card-date">
+          <div class="month">6月</div>
+          <div class="day">23</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">第2回 運営ミーティング</div>
+          <div class="card-meta">
+            <span>火曜日</span>
+            <span>19:00〜</span>
+            <span class="tag new">NEW</span>
+          </div>
+        </div>
+        <div class="card-arrow">›</div>
+      </a>
+      -->
+
+    </div>
+  </div>
+
+  <!-- 議事録の追加方法ガイド -->
+  <div class="guide-box">
+    <h3>📌 次回の議事録を追加するときは</h3>
+    <ol>
+      <li>新しい議事録HTMLを <code>gijiroku/2026-XX-XX.html</code> という名前で保存</li>
+      <li>このページ（index.html）の「次回以降はここに追加」のコメント部分をコピーして日付・回数を書き換え</li>
+      <li>フォルダごとNetlifyにドラッグ＆ドロップ</li>
+      <li>自動でURLが更新されて完了！</li>
+    </ol>
+  </div>
+
+</main>
+
+</body>
+</html>

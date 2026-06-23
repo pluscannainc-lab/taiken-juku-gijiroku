@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>議事録 2026年6月9日</title>
+  <style>
+    :root {
+      --green-dark:  #2d6a4f;
+      --green-mid:   #52b788;
+      --green-light: #d8f3dc;
+      --green-pale:  #f0faf3;
+      --earth:       #6b4c2a;
+      --earth-light: #f5ede3;
+      --sky:         #2563a8;
+      --sky-light:   #e8f0fb;
+      --sun:         #e67e22;
+      --sun-light:   #fef3e2;
+      --red-light:   #fdecea;
+      --red:         #c0392b;
+      --text:        #1a1a1a;
+      --text-sub:    #555;
+      --border:      #c8e6c9;
+      --white:       #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+      background: var(--green-pale);
+      color: var(--text);
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    /* ヘッダー */
+    header {
+      background: linear-gradient(135deg, var(--green-dark), var(--green-mid));
+      color: white;
+      padding: 40px 32px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '🌱';
+      position: absolute;
+      right: 32px;
+      top: 24px;
+      font-size: 64px;
+      opacity: 0.25;
+    }
+    header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
+    header p {
+      font-size: 13px;
+      opacity: 0.85;
+    }
+
+    /* メインレイアウト */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+
+    /* セクション */
+    .section {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 28px 28px 24px;
+      margin-bottom: 24px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--green-dark);
+      border-left: 4px solid var(--green-mid);
+      padding-left: 12px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* 基本情報テーブル */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    table th {
+      background: var(--green-light);
+      color: var(--green-dark);
+      font-weight: 700;
+      padding: 10px 14px;
+      text-align: left;
+      width: 30%;
+      border-bottom: 1px solid var(--border);
+    }
+    table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #eee;
+    }
+    table tr:last-child th,
+    table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* 決定事項 */
+    .decision-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .decision-list li {
+      background: var(--green-light);
+      border-radius: 8px;
+      padding: 12px 16px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 14px;
+    }
+    .decision-list li .num {
+      background: var(--green-dark);
+      color: white;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .decision-list li .label {
+      font-weight: 700;
+      color: var(--green-dark);
+    }
+    .decision-list .sub {
+      margin-top: 6px;
+      padding-left: 4px;
+      list-style: none;
+      font-size: 13px;
+      color: var(--text-sub);
+    }
+    .decision-list .sub li {
+      background: none;
+      padding: 2px 0;
+      display: flex;
+      gap: 6px;
+      align-items: flex-start;
+    }
+    .decision-list .sub li::before {
+      content: '▸';
+      color: var(--green-mid);
+      flex-shrink: 0;
+    }
+
+    /* やること一覧 */
+    .action-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .action-table thead th {
+      background: var(--sky-light);
+      color: var(--sky);
+      font-weight: 700;
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 2px solid #bdd3f5;
+    }
+    .action-table tbody tr:nth-child(even) {
+      background: #f7faff;
+    }
+    .action-table tbody td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #e0eaf8;
+      vertical-align: top;
+    }
+    .action-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+    .badge-who {
+      display: inline-block;
+      background: var(--sky);
+      color: white;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .badge-date {
+      display: inline-block;
+      background: var(--sun-light);
+      color: var(--sun);
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    /* 議題詳細 */
+    .topic {
+      margin-bottom: 28px;
+    }
+    .topic:last-child { margin-bottom: 0; }
+
+    .topic-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--earth);
+      background: var(--earth-light);
+      padding: 8px 14px;
+      border-radius: 6px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sub-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--green-dark);
+      border-bottom: 1px dashed var(--border);
+      padding-bottom: 4px;
+      margin: 14px 0 8px;
+    }
+
+    .speaker-block {
+      margin-bottom: 10px;
+      padding-left: 4px;
+    }
+    .speaker {
+      display: inline-block;
+      background: var(--green-dark);
+      color: white;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .speaker-block p,
+    .speaker-block ul {
+      font-size: 14px;
+      color: var(--text);
+      padding-left: 4px;
+    }
+    .speaker-block ul {
+      padding-left: 20px;
+      list-style: disc;
+    }
+    .speaker-block ul li {
+      margin-bottom: 4px;
+    }
+
+    .decision-inline {
+      background: var(--green-light);
+      border-left: 3px solid var(--green-mid);
+      border-radius: 4px;
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--green-dark);
+      margin: 12px 0;
+    }
+    .decision-inline::before {
+      content: '✅ 決定：';
+    }
+
+    .warn-box {
+      background: var(--red-light);
+      border-left: 3px solid var(--red);
+      border-radius: 4px;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: var(--red);
+      font-weight: 700;
+      margin: 10px 0;
+    }
+    .warn-box::before { content: '⚠️ 課題：'; }
+
+    /* 数字ハイライト */
+    .number-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin: 14px 0;
+    }
+    .number-card {
+      background: var(--sky-light);
+      border-radius: 8px;
+      padding: 12px 16px;
+      text-align: center;
+    }
+    .number-card .big {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--sky);
+    }
+    .number-card .label {
+      font-size: 12px;
+      color: var(--text-sub);
+      margin-top: 2px;
+    }
+
+    /* 区切り */
+    hr.divider {
+      border: none;
+      border-top: 1px dashed var(--border);
+      margin: 20px 0;
+    }
+
+    /* 次回 */
+    .next-box {
+      background: linear-gradient(135deg, var(--green-light), var(--sky-light));
+      border-radius: 10px;
+      padding: 18px 22px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--green-dark);
+      margin-top: 8px;
+    }
+    .next-box span {
+      font-size: 20px;
+    }
+
+    /* 再掲バナー */
+    .recap-banner {
+      background: var(--green-dark);
+      color: white;
+      border-radius: 8px 8px 0 0;
+      padding: 10px 20px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-align: center;
+    }
+    .recap-section {
+      border: 2px solid var(--green-dark);
+      border-radius: 0 0 12px 12px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .recap-section .decision-list {
+      padding: 20px 24px;
+      background: white;
+    }
+
+    @media (max-width: 600px) {
+      header { padding: 28px 18px 24px; }
+      .section { padding: 20px 16px; }
+      .number-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🌿 体験塾 運営ミーティング 議事録</h1>
+  <p>2026年6月9日（火）19:00〜 ／ オンライン（Google Meet）</p>
+</header>
+
+<main>
+
+  <!-- 基本情報 -->
+  <div class="section">
+    <div class="section-title">👥 基本情報</div>
+    <table>
+      <tr><th>日時</th><td>2026年6月9日（火）19:00〜</td></tr>
+      <tr><th>形式</th><td>オンライン（Google Meet）</td></tr>
+      <tr><th>出席者</th><td>漢那宗貴（塾長・司会）、杉田君恵（杉田農園）、杉田和隆（杉田農園）、島袋悟（島袋農園）、多和田（事務局）</td></tr>
+      <tr><th>欠席</th><td>新垣裕一（事務局長）※以降のミーティングより不参加予定</td></tr>
+      <tr><th>議事録担当</th><td>漢那宗貴（音声録音→文字起こし方式・初回）</td></tr>
+    </table>
+  </div>
+
+  <!-- 決定事項 -->
+  <div class="section">
+    <div class="section-title">✅ 決定事項</div>
+    <ul class="decision-list">
+      <li><span class="num">1</span><div><span class="label">会議の日程を固定する</span>：毎月第2・第4火曜日 19:00〜（体験塾の4日前）</div></li>
+      <li><span class="num">2</span><div><span class="label">会議の時間は1時間を目安にする</span>：話すことを絞って進める</div></li>
+      <li>
+        <span class="num">3</span>
+        <div>
+          <span class="label">雨の日の運営方針（暫定）</span>
+          <ul class="sub">
+            <li>弱い雨 → 北波平農園の東屋で実施、様子を見て現地へ移行</li>
+            <li>強い雨 → 中止</li>
+            <li>別の場所を借りての開催は、今のところしない</li>
+          </ul>
+        </div>
+      </li>
+      <li><span class="num">4</span><div><span class="label">休憩所の呼び方を「東屋（あずまや）」に統一する</span></div></li>
+      <li><span class="num">5</span><div><span class="label">支払いシステムをツクツクからはるまーいに切り替える</span>：今週中に準備を整える</div></li>
+      <li><span class="num">6</span><div><span class="label">会員の契約内容を確認する</span>：年間契約かずっと続くタイプか、新垣裕一氏に確認して全員に知らせる（漢那が対応）</div></li>
+      <li><span class="num">7</span><div><span class="label">議事録の作り方を統一する</span>：録音→文字起こし→GPTで議事録作成（多和田より動画を漢那に共有）</div></li>
+      <li><span class="num">8</span><div><span class="label">次回の会議</span>：6月23日（火）19:00〜</div></li>
+    </ul>
+  </div>
+
+  <!-- やること一覧 -->
+  <div class="section">
+    <div class="section-title">📋 やること一覧</div>
+    <table class="action-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>担当</th>
+          <th>内容</th>
+          <th>期限</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><span class="badge-who">杉田和隆</span></td>
+          <td>天気別（晴れ・小雨・雨・前日雨）の作業内容一覧表を作り、次回共有</td>
+          <td><span class="badge-date">次回会議まで</span></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><span class="badge-who">漢那</span></td>
+          <td>はるまーいの支払いリンク・案内を整備</td>
+          <td><span class="badge-date">今週中</span></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><span class="badge-who">漢那</span></td>
+          <td>新垣裕一氏に契約書類の場所・内容を確認して全員に知らせる</td>
+          <td><span class="badge-date">次回会議まで</span></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><span class="badge-who">多和田</span></td>
+          <td>議事録の作り方動画を漢那に送る</td>
+          <td><span class="badge-date">随時</span></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><span class="badge-who">杉田君恵</span></td>
+          <td>公式LINEへの登録案内（東屋内の資料）をグループLINEに写真で共有</td>
+          <td><span class="badge-date">随時</span></td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><span class="badge-who">杉田和隆</span></td>
+          <td>伊是名さんの畝立て対応について個別に連絡・調整</td>
+          <td><span class="badge-date">今週中</span></td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td><span class="badge-who">全員</span></td>
+          <td>次回会議に向けて、広告・SNSの集客アイデアを考えてくる</td>
+          <td><span class="badge-date">次回会議まで</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 話し合いの内容 -->
+  <div class="section">
+    <div class="section-title">🗣️ 話し合いの内容</div>
+
+    <!-- 1 -->
+    <div class="topic">
+      <div class="topic-title">1. 開会・はじめのあいさつ</div>
+      <div class="speaker-block">
+        <span class="speaker">漢那</span>
+        <p>今回が塾長・司会として初めての進行。前回は日程を知らず欠席したが、議事録を読んで状況を把握。今後の進め方や役割分担を確認しながら進めたい。</p>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- 2 -->
+    <div class="topic">
+      <div class="topic-title">2. 議事録の精度を上げるための決まりごとの共有</div>
+      <div class="speaker-block">
+        <span class="speaker">多和田</span>
+        <p>音声録音をもとに議事録を作る際の精度を高めるための決まりごとを説明。</p>
+      </div>
+
+      <div class="sub-title">精度が上がらない原因</div>
+      <div class="speaker-block">
+        <ul>
+          <li>話し方の問題ではなく、「誰が・何の立場で・何について話しているか」がわからないことが主な原因</li>
+        </ul>
+      </div>
+
+      <div class="sub-title">精度を上げる4つのポイント</div>
+      <div class="speaker-block">
+        <ul>
+          <li>録音の質</li>
+          <li>話し方の質（出席者の話し方）</li>
+          <li>事前の準備（司会者が議題を整理しておく）</li>
+          <li>編集する力</li>
+        </ul>
+      </div>
+
+      <div class="sub-title">出席者へのお願い</div>
+      <div class="speaker-block">
+        <ul>
+          <li><strong>結論から話す</strong>（結論→理由→補足の順）</li>
+          <li><strong>名前をはっきり言う</strong>：「私がやります」ではなく「漢那がやります」のように主語を明確に</li>
+          <li>同じものに対して<strong>違う呼び方をしない</strong>（呼び方を一つに統一する）</li>
+          <li>会議の終わりに<strong>決まったことを声に出して確認する</strong></li>
+          <li><strong>同時に話さない</strong>：前の人が話し終わってから話す</li>
+          <li>雑談と本題を区別する：「雑談ですが」「本題に戻りますが」「決定事項ですが」と一言添える</li>
+        </ul>
+      </div>
+
+      <div class="sub-title">司会者の役割</div>
+      <div class="speaker-block">
+        <ul>
+          <li>会議の最初に「今日話すことは〇つです」と伝える</li>
+          <li>現状の共有→課題の整理→話し合い→決まったことの確認、という流れで進める</li>
+          <li>やることが決まったら「誰が・いつまでに」をセットで確認する</li>
+        </ul>
+      </div>
+
+      <div class="sub-title">これからの目標イメージ</div>
+      <div class="speaker-block">
+        <p>議事録を作る→やることが明確になる→進み具合を管理する→次の会議の議事録に自動で反映される、というサイクルを回すことで、組織全体の動きがよくなる。</p>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- 3 -->
+    <div class="topic">
+      <div class="topic-title">3. 会議の進め方・体制の確認</div>
+      <div class="speaker-block">
+        <span class="speaker">杉田君恵</span>
+        <p>これまでの議事録はLINEのノートに手入力→新垣氏がAIの文字起こし（Notion経由）に切り替えを試みていた。今は方式が混在している状態。</p>
+      </div>
+      <div class="speaker-block">
+        <span class="speaker">漢那</span>
+        <p>今後は録音→文字起こし→GPTで議事録作成の方式に統一していく。</p>
+      </div>
+      <div class="speaker-block">
+        <span class="speaker">新垣裕一（事務局長）</span>
+        <p>今後は他の仕事が多いため本会議には不参加。引き続き全体のとりまとめ・システム移行・契約整備のサポートとして連携する。</p>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- 4 -->
+    <div class="topic">
+      <div class="topic-title">4. 雨の日の運営について（現場班）</div>
+      <div class="speaker-block">
+        <span class="speaker">杉田君恵</span>
+        <p>天気に応じた運営の流れを整理したい。ただし基本は臨機応変な対応で、細かすぎる資料は不要。</p>
+      </div>
+      <div class="speaker-block">
+        <span class="speaker">多和田</span>
+        <p>運用ガイド（表）の現場班のページに、天気別の作業一覧（晴れ・小雨・雨・前日雨）をシンプルな表で整備することを提案。</p>
+      </div>
+      <div class="decision-inline">杉田和隆氏が叩き台を作り、次回共有。「完璧を目指さずまず作ることが大事」（多和田）</div>
+      <div class="speaker-block">
+        <span class="speaker">全員</span>
+        <p>休憩所の呼び方を「東屋（あずまや）」に統一することを確認。</p>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- 5 -->
+    <div class="topic">
+      <div class="topic-title">5. コンテンツの整理・活用方針</div>
+      <div class="speaker-block">
+        <span class="speaker">多和田</span>
+        <p>今あるコンテンツ（YouTubeに約20本以上の動画）が整理されていない部分がある。優先順位をつけて使えると現場の負担が減る。</p>
+      </div>
+      <div class="speaker-block">
+        <span class="speaker">杉田君恵</span>
+        <p>天気別の作業一覧と合わせて、雨の日などに案内できるオンライン動画のリストを整えておくとよい。</p>
+      </div>
+      <div class="decision-inline">座学の動画は新しく作らず、今あるものを使う。現場の負担を増やさない。</div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- 6 -->
+    <div class="topic">
+      <div class="topic-title">6. 会員・伊是名さんへの個別対応</div>
+      <div class="speaker-block">
+        <span class="speaker">杉田君恵</span>
+        <p>新規会員の伊是名さんの畝立てが、雨続きでまだできていない状態。</p>
+      </div>
+      <div class="speaker-block">
+        <span class="speaker">杉田和隆</span>
+        <p>今週の体験塾（6月13日）の天気を見て判断し、延期になる場合は伊是名さんへ連絡する。</p>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- 7 -->
+    <div class="topic">
+      <div class="topic-title">7. 目標数値・お金の状況の共有</div>
+      <div class="speaker-block">
+        <span class="speaker">多和田</span>
+        <p>現状を報告。</p>
+      </div>
+
+      <div class="sub-title">今年度の目標（重要な数字）</div>
+      <div class="speaker-block">
+        <ul>
+          <li>全農園の使用率（目標：80%＝36区画）</li>
+          <li>仕組みを広げる農園の数（目標：2箇所）</li>
+          <li>法人との契約数（目標：2社）</li>
+        </ul>
+      </div>
+
+      <div class="sub-title">現状</div>
+      <div class="warn-box">農園を広げること・法人契約ともに手つかず。使用率がかなり危険な状態。このまま更新がなければ年度末に3名まで減る見通し。</div>
+
+      <div class="number-grid">
+        <div class="number-card"><div class="big">45</div><div class="label">全区画数</div></div>
+        <div class="number-card"><div class="big">36</div><div class="label">目標区画数（80%）</div></div>
+        <div class="number-card"><div class="big">135万</div><div class="label">売上見込み</div></div>
+        <div class="number-card"><div class="big">▲4万</div><div class="label">差引（累損見通し）</div></div>
+      </div>
+
+      <div class="sub-title">会員の状況確認</div>
+      <div class="speaker-block">
+        <ul>
+          <li><strong>A-15 比嘉英雄さん</strong>：畑は放置気味だが退会はしていない。継続状況は現場では把握できていない</li>
+          <li><strong>A-18 田里なおこさん（？）</strong>：契約の満期がいつかわからない。更新の案内をしたかどうかも把握できていない。※初期の方々は満期があることを把握されているかどうかわからないという話だった</li>
+          <li><strong>A-4 平良剛さん</strong>：退会・畑の片付け済み</li>
+          <li><strong>A-9 本白水（もとしろみず）さん</strong>：退会の意思表示なし、続けているとみられる</li>
+          <li>
+            <strong>A-5 金城正勝さん（契約名：玉城さん）</strong>：9月まで前払い済み（銀行振込による前払い対応）
+            <ul style="margin-top:6px; font-size:13px; color:#555;">
+              <li>ご高齢につき、LINEは既読できるが返事はできない</li>
+              <li>カード支払いができないため、娘さん（玉城さん）にまとめて前払いの銀行振込で対応いただいている（前回から。それ以前は現金対応だった）</li>
+            </ul>
+          </li>
+          <li><strong>B-5 福元さん</strong>：4月末に退会済み</li>
+        </ul>
+      </div>
+      <div class="warn-box">ずっと続くタイプの契約か期間が決まっている契約かがわからず、満期の管理や更新の案内ができていない状態。</div>
+      <div class="decision-inline">漢那が新垣裕一氏に契約書類・決まりごとを確認し、全員に知らせる。</div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- 8 -->
+    <div class="topic">
+      <div class="topic-title">8. 集客・広報の話し合い</div>
+
+      <div class="sub-title">過去の実績（多和田より共有）</div>
+      <div class="speaker-block">
+        <ul>
+          <li>2023年3〜8月にチラシ配り広告（合計約66万円）を実施</li>
+          <li>8名から最大21〜22名まで増加（約3倍）</li>
+          <li>地区を変えながら続けたことが効果的だった</li>
+          <li>広告をやめた後は右肩下がりになっている</li>
+        </ul>
+      </div>
+
+      <div class="sub-title">これからのアイデア（意見出し）</div>
+      <div class="speaker-block">
+        <span class="speaker">島袋悟</span>
+        <p>自分の農園ではメルマガ・インスタ・友人紹介の順で集客。まず紹介を優先し、次にメルマガ、インスタの流れ。</p>
+      </div>
+      <div class="speaker-block">
+        <span class="speaker">漢那</span>
+        <p>知人のラジオ・YouTubeへの出演で無料で宣伝することを検討中。</p>
+      </div>
+      <div class="speaker-block">
+        <span class="speaker">杉田君恵</span>
+        <p>体験塾のインスタのアカウントが止まっている状態。体験塾の当日に写真を撮ってその場で投稿する程度なら対応できそう。ただし現場の負担を減らすために一度止めた経緯あり。</p>
+      </div>
+      <div class="speaker-block">
+        <span class="speaker">多和田</span>
+        <p>今いる会員へのご褒美（友人紹介で1ヶ月分を還元するなど）を現会員にも使えるようにすると、口コミが広がりやすくなるかも。</p>
+      </div>
+      <div class="speaker-block">
+        <span class="speaker">島袋悟</span>
+        <p>農業に興味のある発信者・インスタグラマーにDMで体験参加を呼びかけるのも一つの手。</p>
+      </div>
+      <div class="speaker-block">
+        <span class="speaker">漢那</span>
+        <p>知人のタレント・與那嶺のぞみさん（インスタ・YouTube活動中）へ体験参加の声かけを検討。</p>
+      </div>
+      <div class="decision-inline">次回会議（6月23日）までに各自アイデアを持ち寄り、広告・SNSの活用方法をみんなで考える。</div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- 9 -->
+    <div class="topic">
+      <div class="topic-title">9. 終わりに・次回の日程</div>
+      <div class="speaker-block">
+        <span class="speaker">杉田君恵</span>
+        <p>当日は体の検査（大腸カメラ）の予定があり、欠席または録音だけで確認になる可能性あり。</p>
+      </div>
+      <div class="next-box">
+        📅 次回：<span>2026年6月23日（火）19:00〜</span>
+      </div>
+    </div>
+
+  </div><!-- /話し合いの内容 -->
+
+  <!-- 決定事項（再掲） -->
+  <div class="recap-banner">✅ 決定事項（再掲）</div>
+  <div class="recap-section">
+    <ul class="decision-list">
+      <li><span class="num">1</span><div><span class="label">会議の日程を固定する</span>：毎月第2・第4火曜日 19:00〜（体験塾の4日前）</div></li>
+      <li><span class="num">2</span><div><span class="label">会議の時間は1時間を目安にする</span>：話すことを絞って進める</div></li>
+      <li>
+        <span class="num">3</span>
+        <div>
+          <span class="label">雨の日の運営方針（暫定）</span>
+          <ul class="sub">
+            <li>弱い雨 → 北波平農園の東屋で実施、様子を見て現地へ移行</li>
+            <li>強い雨 → 中止</li>
+            <li>別の場所を借りての開催は、今のところしない</li>
+          </ul>
+        </div>
+      </li>
+      <li><span class="num">4</span><div><span class="label">休憩所の呼び方を「東屋（あずまや）」に統一する</span></div></li>
+      <li><span class="num">5</span><div><span class="label">支払いシステムをツクツクからはるまーいに切り替える</span>：今週中に準備を整える</div></li>
+      <li><span class="num">6</span><div><span class="label">会員の契約内容を確認する</span>：年間契約かずっと続くタイプか、新垣裕一氏に確認して全員に知らせる（漢那が対応）</div></li>
+      <li><span class="num">7</span><div><span class="label">議事録の作り方を統一する</span>：録音→文字起こし→GPTで議事録作成（多和田より動画を漢那に共有）</div></li>
+      <li><span class="num">8</span><div><span class="label">次回の会議</span>：6月23日（火）19:00〜</div></li>
+    </ul>
+  </div>
+
+</main>
+</body>
+</html>
