@@ -190,6 +190,98 @@
       margin: 20px 0;
     }
 
+    /* 担当者カラー */
+    .person {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 3px 10px 3px 4px;
+      border-radius: 20px;
+    }
+    .person .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .p-kanna     { background: #e8f5e9; color: #1b5e20; }
+    .p-kanna .dot     { background: #2e7d32; }
+    .p-aragaki   { background: #e3f2fd; color: #0d47a1; }
+    .p-aragaki .dot   { background: #1565c0; }
+    .p-tawada    { background: #fff3e0; color: #8a4b00; }
+    .p-tawada .dot    { background: #ef6c00; }
+    .p-sugita    { background: #fce4ec; color: #880e4f; }
+    .p-sugita .dot    { background: #ad1457; }
+    .p-all       { background: #f0f0ec; color: #444442; }
+    .p-all .dot       { background: #78786f; }
+
+    /* ステータスバッジ */
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .s-todo     { background: #ffebee; color: #b71c1c; }
+    .s-progress { background: #e3f2fd; color: #0d47a1; }
+    .s-urgent   { background: #fff3e0; color: #c1440e; }
+    .s-done     { background: #e8f5e9; color: #1b5e20; }
+
+    /* タスクボード */
+    .task-board {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    .task-person-card {
+      background: #fafaf7;
+      border: 1px solid #e6e6de;
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .task-person-card.p-kanna   { border-top: 4px solid #2e7d32; }
+    .task-person-card.p-aragaki { border-top: 4px solid #1565c0; }
+    .task-person-card.p-tawada  { border-top: 4px solid #ef6c00; }
+    .task-person-card.p-sugita  { border-top: 4px solid #ad1457; }
+    .task-person-card.p-all     { border-top: 4px solid #78786f; }
+    .task-person-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: #2c2c2c;
+      margin-bottom: 10px;
+    }
+    .task-item {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 13px;
+      color: #3a3a3a;
+      padding: 6px 0;
+      border-bottom: 1px dashed #e2e2da;
+    }
+    .task-item:last-child { border-bottom: none; }
+    .task-item .task-label { flex: 1; line-height: 1.5; }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      font-size: 12px;
+      color: #777;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid #f0f0f0;
+    }
+    .legend span { display: inline-flex; align-items: center; gap: 5px; }
+    .legend .dot { width: 8px; height: 8px; border-radius: 50%; }
+
     /* 次回MTG・確認事項 */
     .next-meeting {
       background: #e8f5e9;
@@ -224,6 +316,50 @@
     </dl>
   </header>
 
+  <!-- タスクボード -->
+  <section>
+    <h2 class="section-title">🎯 タスクボード（担当者別）</h2>
+    <div class="card">
+      <div class="task-board">
+
+        <div class="task-person-card p-kanna">
+          <p class="task-person-name"><span class="person p-kanna"><span class="dot"></span>漢那</span></p>
+          <div class="task-item"><span class="task-label">解約案内ページの新設</span><span class="status s-todo">未着手</span></div>
+          <div class="task-item"><span class="task-label">会員台帳の人数確認（初美さんへ）</span><span class="status s-todo">未着手</span></div>
+          <div class="task-item"><span class="task-label">上村みどりさんの支払いフロー確認</span><span class="status s-todo">未着手</span></div>
+        </div>
+
+        <div class="task-person-card p-aragaki">
+          <p class="task-person-name"><span class="person p-aragaki"><span class="dot"></span>新垣裕一</span></p>
+          <div class="task-item"><span class="task-label">駐車場境界杭の補修日程確定</span><span class="status s-todo">未着手</span></div>
+        </div>
+
+        <div class="task-person-card p-tawada">
+          <p class="task-person-name"><span class="person p-tawada"><span class="dot"></span>多和田</span></p>
+          <div class="task-item"><span class="task-label">運用ガイド2026年版の作成</span><span class="status s-progress">進行中</span></div>
+        </div>
+
+        <div class="task-person-card p-sugita">
+          <p class="task-person-name"><span class="person p-sugita"><span class="dot"></span>杉田君恵</span></p>
+          <div class="task-item"><span class="task-label">看板ステッカーのサイズ計測・印刷調査</span><span class="status s-todo">未着手</span></div>
+        </div>
+
+        <div class="task-person-card p-all">
+          <p class="task-person-name"><span class="person p-all"><span class="dot"></span>全員</span></p>
+          <div class="task-item"><span class="task-label">台風対策（8日接近前に）</span><span class="status s-urgent">要対応</span></div>
+          <div class="task-item"><span class="task-label">チラシ配布アイデアの持ち寄り</span><span class="status s-progress">進行中</span></div>
+        </div>
+
+      </div>
+      <div class="legend">
+        <span><span class="dot" style="background:#b71c1c"></span>未着手＝まだ手をつけていない</span>
+        <span><span class="dot" style="background:#0d47a1"></span>進行中＝取り組み中</span>
+        <span><span class="dot" style="background:#c1440e"></span>要対応＝期限が近く優先度高め</span>
+        <span><span class="dot" style="background:#1b5e20"></span>完了＝対応済み</span>
+      </div>
+    </div>
+  </section>
+
   <!-- 決定事項 -->
   <section>
     <h2 class="section-title">決定事項</h2>
@@ -256,48 +392,57 @@
             <th>#</th>
             <th>担当</th>
             <th>内容</th>
+            <th>状況</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>1</td>
-            <td>新垣裕一</td>
+            <td><span class="person p-aragaki"><span class="dot"></span>新垣裕一</span></td>
             <td>駐車場境界杭の補修日程を確定する</td>
+            <td><span class="status s-todo">未着手</span></td>
           </tr>
           <tr>
             <td>2</td>
-            <td>漢那</td>
+            <td><span class="person p-kanna"><span class="dot"></span>漢那</span></td>
             <td>ホームページに解約案内ページを新設（前月15日までの解約案内ルールを明記）</td>
+            <td><span class="status s-todo">未着手</span></td>
           </tr>
           <tr>
             <td>3</td>
-            <td>多和田</td>
+            <td><span class="person p-tawada"><span class="dot"></span>多和田</span></td>
             <td>運用ガイド2026年版を作成（10月の新年度開始までに）</td>
+            <td><span class="status s-progress">進行中</span></td>
           </tr>
           <tr>
             <td>4</td>
-            <td>杉田君恵</td>
+            <td><span class="person p-sugita"><span class="dot"></span>杉田君恵</span></td>
             <td>看板QRコードステッカーのサイズを計測し、インクジェット印刷の可否・価格を調査</td>
+            <td><span class="status s-todo">未着手</span></td>
           </tr>
           <tr>
             <td>5</td>
-            <td>全員</td>
+            <td><span class="person p-all"><span class="dot"></span>全員</span></td>
             <td>8日の台風接近前に台風対策を実施</td>
+            <td><span class="status s-urgent">要対応</span></td>
           </tr>
           <tr>
             <td>6</td>
-            <td>漢那</td>
+            <td><span class="person p-kanna"><span class="dot"></span>漢那</span></td>
             <td>会員台帳の人数不一致（4名/10名）を漢那初美さんに確認</td>
+            <td><span class="status s-todo">未着手</span></td>
           </tr>
           <tr>
             <td>7</td>
-            <td>漢那</td>
+            <td><span class="person p-kanna"><span class="dot"></span>漢那</span></td>
             <td>上村みどりさんの現状回復チケットの支払いフローを漢那初美さん・磯部さんに確認</td>
+            <td><span class="status s-todo">未着手</span></td>
           </tr>
           <tr>
             <td>8</td>
-            <td>全員</td>
+            <td><span class="person p-all"><span class="dot"></span>全員</span></td>
             <td>新規募集チラシの詳細アイデアを持ち寄る（8月17日の次回ミーティングまでに）</td>
+            <td><span class="status s-progress">進行中</span></td>
           </tr>
         </tbody>
       </table>
