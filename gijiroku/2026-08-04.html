@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>議事録 2026年8月4日｜はるさー体験塾</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Noto Sans CJK JP", "Noto Sans JP", "Hiragino Sans", "Yu Gothic UI", sans-serif;
+      font-size: 15px;
+      line-height: 1.8;
+      color: #2c2c2c;
+      background: #f5f5f0;
+    }
+    .wrapper {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* ヘッダー */
+    .doc-header {
+      background: linear-gradient(135deg, #2e7d32 0%, #43a047 100%);
+      color: #fff;
+      border-radius: 12px;
+      padding: 32px 36px 28px;
+      margin-bottom: 32px;
+    }
+    .doc-header .org-name {
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      opacity: 0.85;
+      margin-bottom: 6px;
+    }
+    .doc-header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 8px 24px;
+      font-size: 13px;
+      opacity: 0.92;
+    }
+    .meta-grid dt { font-weight: 600; }
+    .meta-grid dd { margin: 0; }
+
+    /* セクション共通 */
+    section { margin-bottom: 28px; }
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      background: #388e3c;
+      border-radius: 6px;
+      padding: 7px 16px;
+      margin-bottom: 14px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    /* 決定事項 */
+    .decision-list {
+      list-style: none;
+      counter-reset: decision;
+    }
+    .decision-list li {
+      counter-increment: decision;
+      display: flex;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .decision-list li:last-child { border-bottom: none; }
+    .decision-list li::before {
+      content: counter(decision);
+      min-width: 26px;
+      height: 26px;
+      background: #43a047;
+      color: #fff;
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* アクションアイテム */
+    .action-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    .action-table th {
+      background: #e8f5e9;
+      color: #2e7d32;
+      font-weight: 700;
+      padding: 9px 12px;
+      text-align: left;
+      border-bottom: 2px solid #a5d6a7;
+    }
+    .action-table td {
+      padding: 9px 12px;
+      border-bottom: 1px solid #f0f0f0;
+      vertical-align: top;
+    }
+    .action-table tr:last-child td { border-bottom: none; }
+    .badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .badge-done  { background: #c8e6c9; color: #1b5e20; }
+    .badge-next  { background: #fff9c4; color: #f57f17; }
+    .badge-long  { background: #e3f2fd; color: #0d47a1; }
+    .badge-free  { background: #f3e5f5; color: #4a148c; }
+
+    /* 議題詳細 */
+    .agenda-block { margin-bottom: 20px; }
+    .agenda-num {
+      font-size: 13px;
+      color: #43a047;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .agenda-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1b5e20;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #a5d6a7;
+    }
+    .speaker-block { margin-bottom: 12px; }
+    .speaker-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #388e3c;
+      margin-bottom: 4px;
+    }
+    ul.detail-list { list-style: none; padding: 0; }
+    ul.detail-list li {
+      padding: 4px 0 4px 18px;
+      position: relative;
+    }
+    ul.detail-list li::before {
+      content: "・";
+      position: absolute;
+      left: 0;
+      color: #66bb6a;
+    }
+    .sub-list {
+      list-style: none;
+      padding-left: 18px;
+      margin-top: 4px;
+    }
+    .sub-list li {
+      padding: 3px 0 3px 16px;
+      position: relative;
+      font-size: 14px;
+      color: #444;
+    }
+    .sub-list li::before {
+      content: "―";
+      position: absolute;
+      left: 0;
+      color: #a5d6a7;
+    }
+    .note {
+      font-size: 13px;
+      color: #777;
+      margin-bottom: 12px;
+    }
+    hr.divider {
+      border: none;
+      border-top: 1px solid #f0f0f0;
+      margin: 20px 0;
+    }
+
+    /* 次回MTG・確認事項 */
+    .next-meeting {
+      background: #e8f5e9;
+      border-left: 4px solid #43a047;
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      font-size: 15px;
+    }
+    .next-meeting strong { color: #2e7d32; }
+
+    /* フッター */
+    footer {
+      text-align: center;
+      font-size: 12px;
+      color: #aaa;
+      margin-top: 48px;
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- ヘッダー -->
+  <header class="doc-header">
+    <p class="org-name">はるさー体験塾</p>
+    <h1>定例MTG　議事録</h1>
+    <dl class="meta-grid">
+      <dt>日時</dt><dd>2026年8月4日（火）19:00〜20:00頃</dd>
+      <dt>開催形式</dt><dd>オンライン（Google Meet）</dd>
+      <dt>議事録作成</dt><dd>漢那宗貴</dd>
+      <dt>出席者</dt><dd>漢那宗貴・多和田真淳・杉田君恵・杉田和隆・島袋悟（島袋農園）・新垣裕一（代表・途中参加）</dd>
+    </dl>
+  </header>
+
+  <!-- 決定事項 -->
+  <section>
+    <h2 class="section-title">決定事項</h2>
+    <div class="card">
+      <ol class="decision-list">
+        <li>Instagram運用（杉田君恵さんによる投稿）は軌道に乗り、この議題はクリアとした</li>
+        <li>駐車場境界杭の補修は新垣裕一さん対応予定だが未着手。今後日程を調整する</li>
+        <li>契約書改定（自動更新条項の見直し等）は引き続き保留（ペンディング）とする</li>
+        <li>契約更新・解約の案内フロー整備が必要と確認。ホームページに解約案内ページを新設する方向とし、対応は漢那が担当する</li>
+        <li>運用ガイドは現行2025年版から2026年版へ更新。新年度（10月〜）に合わせて多和田さんが作成する</li>
+        <li>伊是名さん・福元さんの価格変更、比嘉さんの解約・現状回復は前回までに完了済みと確認</li>
+        <li>支払いシステム（はるまーい）移行はほぼ完了。決済不具合は真栄平さんが修正済みで正常稼働中</li>
+        <li>看板・パンフレット・チラシのQRコード差し替えが必要。パンフレットはシール対応より刷り直しの方がコスト面で有利な可能性があり、看板は屋外用ステッカーで対応を検討する</li>
+        <li>台風接近（8日想定）のため、各自台風対策を実施する</li>
+        <li>会員台帳が4名分しか反映されておらず、実際は10名在籍していることが判明。漢那初美さんに最新情報の共有・確認を依頼する</li>
+        <li>上村みどりさんの現状回復チケットの支払いフローについて、漢那初美さんに確認が必要</li>
+        <li>体験塾公式LINEの管理体制に漢那宗貴が参加済み（対応完了）</li>
+        <li>新規募集チラシの詳細（配布内容・タイミング等）は、8月17日の次回ミーティングまでに各自アイデアを持ち寄り、その場で決定する</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- アクションアイテム -->
+  <section>
+    <h2 class="section-title">アクションアイテム</h2>
+    <div class="card">
+      <table class="action-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>担当</th>
+            <th>内容</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>新垣裕一</td>
+            <td>駐車場境界杭の補修日程を確定する</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>漢那</td>
+            <td>ホームページに解約案内ページを新設（前月15日までの解約案内ルールを明記）</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>多和田</td>
+            <td>運用ガイド2026年版を作成（10月の新年度開始までに）</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>杉田君恵</td>
+            <td>看板QRコードステッカーのサイズを計測し、インクジェット印刷の可否・価格を調査</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>全員</td>
+            <td>8日の台風接近前に台風対策を実施</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>漢那</td>
+            <td>会員台帳の人数不一致（4名/10名）を漢那初美さんに確認</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>漢那</td>
+            <td>上村みどりさんの現状回復チケットの支払いフローを漢那初美さん・磯部さんに確認</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>全員</td>
+            <td>新規募集チラシの詳細アイデアを持ち寄る（8月17日の次回ミーティングまでに）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 議題詳細 -->
+  <section>
+    <h2 class="section-title">議題詳細</h2>
+    <div class="card">
+
+      <!-- 議題1 -->
+      <div class="agenda-block">
+        <p class="agenda-num">議題 1</p>
+        <h3 class="agenda-title">Instagram運用の引き継ぎ</h3>
+        <div class="speaker-block">
+          <p class="speaker-name">杉田君恵</p>
+          <ul class="detail-list">
+            <li>ログイン権限を引き継ぎ、前回の体験塾で1回投稿を実施したことを報告</li>
+          </ul>
+        </div>
+        <div class="speaker-block">
+          <p class="speaker-name">漢那</p>
+          <ul class="detail-list">
+            <li>メンバー内で投稿への「いいね」を積極的に行うことを提案。了承された</li>
+          </ul>
+        </div>
+        <div class="speaker-block">
+          <p class="speaker-name">補足</p>
+          <ul class="detail-list">
+            <li>君恵さんがLINEオープンチャットに投稿リンクを共有し、メンバーが「いいね」「フォロー」を実施した</li>
+            <li>この議題はクリアと確認</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- 議題2 -->
+      <div class="agenda-block">
+        <p class="agenda-num">議題 2</p>
+        <h3 class="agenda-title">駐車場境界の補修（黒い木製杭の視認性問題）</h3>
+        <div class="speaker-block">
+          <p class="speaker-name">漢那</p>
+          <ul class="detail-list">
+            <li>新垣裕一さんが補修を担当する予定だが、現場での実施はまだ行われていないことを確認</li>
+            <li>具体的な日程は新垣裕一さんに別途確認することとした</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- 議題3 -->
+      <div class="agenda-block">
+        <p class="agenda-num">議題 3</p>
+        <h3 class="agenda-title">契約書関連</h3>
+        <div class="speaker-block">
+          <p class="speaker-name">漢那</p>
+          <ul class="detail-list">
+            <li>自動更新条項の改定について、リーガルチェック等もあり、改定の要否・タイミングは新垣代表と引き続き協議する（保留中）</li>
+          </ul>
+        </div>
+        <div class="speaker-block">
+          <p class="speaker-name">議論</p>
+          <ul class="detail-list">
+            <li>現状、契約は実質自動更新となっており、更新の案内・意思確認のフローが整備されていないことが指摘された</li>
+            <li>解約予告（前月15日まで）のルールはあるが、周知が不十分で認識されていないケースがあると報告された</li>
+            <li>対応として、契約に関する案内をホームページの体験塾ページに掲載し、公式LINEのリッチメニュー等からもアクセスできる仕組みを作ることが決定。対応は漢那が担当する</li>
+          </ul>
+        </div>
+        <div class="speaker-block">
+          <p class="speaker-name">多和田</p>
+          <ul class="detail-list">
+            <li>運用ガイドは現行2025年版。10月の新年度開始に合わせて2026年版を作成する意向を共有（遅延の可能性についても共有済み）</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- 議題4 -->
+      <div class="agenda-block">
+        <p class="agenda-num">議題 4</p>
+        <h3 class="agenda-title">伊是名さん・福元さんの価格変更に関する件</h3>
+        <div class="speaker-block">
+          <p class="speaker-name">漢那</p>
+          <ul class="detail-list">
+            <li>前回議事録で決定済みの内容に変わりなしと確認</li>
+            <li>比嘉さんについては現状回復が完了済み。農業研修生育成プログラムへ移行したことを報告</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- 議題5 -->
+      <div class="agenda-block">
+        <p class="agenda-num">議題 5</p>
+        <h3 class="agenda-title">支払いシステム移行（ツクツク → はるまーい）</h3>
+        <div class="speaker-block">
+          <p class="speaker-name">漢那</p>
+          <ul class="detail-list">
+            <li>移行はほぼ完了。初美さんが事務対応を実施している</li>
+            <li>サブスクリプション決済に一時不具合があったが、真栄平さん（システム開発）により修正済みで、現在は正常稼働している</li>
+          </ul>
+        </div>
+        <div class="speaker-block">
+          <p class="speaker-name">QRコード等の差し替え対応</p>
+          <ul class="detail-list">
+            <li>対象は看板、3つ折りパンフレット、ポスティング用A4チラシ</li>
+            <li>パンフレットは在庫が多く残っているため、シール対応も検討されたが、単価によってはシールの方が刷り直しより高くなる可能性があり、比較検討が必要</li>
+            <li>看板は屋外用フリーカットステッカー用紙での対応を検討。サイズ計測と印刷可否・価格の調査は杉田君恵さんが担当</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- 議題6 -->
+      <div class="agenda-block">
+        <p class="agenda-num">議題 6</p>
+        <h3 class="agenda-title">台風対策</h3>
+        <div class="speaker-block">
+          <p class="speaker-name">共有</p>
+          <ul class="detail-list">
+            <li>接近中の台風は中心気圧950hPa程度と想定され、進路によっては停電の長期化リスクもあると共有</li>
+            <li>各自、台風対策の実施を確認した</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- 議題7 -->
+      <div class="agenda-block">
+        <p class="agenda-num">議題 7</p>
+        <h3 class="agenda-title">会員台帳・受講生の状況確認</h3>
+        <div class="speaker-block">
+          <p class="speaker-name">多和田</p>
+          <ul class="detail-list">
+            <li>台帳上には4名分しか反映されていないが、実際は10名在籍していることが判明</li>
+          </ul>
+        </div>
+        <div class="speaker-block">
+          <p class="speaker-name">漢那</p>
+          <ul class="detail-list">
+            <li>最新情報の反映状況を漢那初美さんに確認・共有を依頼することで合意</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- 議題8 -->
+      <div class="agenda-block">
+        <p class="agenda-num">議題 8</p>
+        <h3 class="agenda-title">上村みどりさんの退会対応</h3>
+        <div class="speaker-block">
+          <p class="speaker-name">漢那</p>
+          <ul class="detail-list">
+            <li>未精算チケットは購入済みと確認</li>
+            <li>現状回復の対応・費用負担フロー（本人が直接依頼するのか、事務局を介するのか）が不明確であり、漢那初美さん・磯部さんへの確認が必要と判断</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- 議題9 -->
+      <div class="agenda-block">
+        <p class="agenda-num">議題 9</p>
+        <h3 class="agenda-title">体験塾公式LINEの管理体制</h3>
+        <div class="speaker-block">
+          <p class="speaker-name">漢那</p>
+          <ul class="detail-list">
+            <li>公式LINE運用スタッフとして参加済み（対応完了）</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- 議題10 -->
+      <div class="agenda-block">
+        <p class="agenda-num">議題 10</p>
+        <h3 class="agenda-title">新規募集（チラシ配布）</h3>
+        <div class="speaker-block">
+          <p class="speaker-name">漢那</p>
+          <ul class="detail-list">
+            <li>新規募集はポスティングでの実施を予定</li>
+            <li>配布内容・タイミングなど詳細については、8月17日の次回ミーティングまでに各自アイデアを持ち寄り、その場で決定することで合意</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 次回MTG -->
+  <section>
+    <h2 class="section-title">次回MTG</h2>
+    <div class="next-meeting">
+      <strong>次回：</strong>2026年8月17日（月）19:00〜20:00
+    </div>
+  </section>
+
+  <footer>
+    <p>はるさー体験塾 &copy; 2026　／　作成：漢那宗貴</p>
+  </footer>
+
+</div>
+</body>
+</html>
