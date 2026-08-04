@@ -46,7 +46,7 @@
       opacity: 0.92;
     }
     .meta-grid dt { font-weight: 600; }
-    .meta-grid dd { margin: 0; }
+    .meta-grid dd { margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
 
     /* セクション共通 */
     section { margin-bottom: 28px; }
@@ -214,6 +214,8 @@
     .p-tawada .dot    { background: #ef6c00; }
     .p-sugita    { background: #fce4ec; color: #880e4f; }
     .p-sugita .dot    { background: #ad1457; }
+    .p-shimabukuro { background: #e0f2f1; color: #004d40; }
+    .p-shimabukuro .dot { background: #00897b; }
     .p-all       { background: #f0f0ec; color: #444442; }
     .p-all .dot       { background: #78786f; }
 
@@ -249,6 +251,7 @@
     .task-person-card.p-aragaki { border-top: 4px solid #1565c0; }
     .task-person-card.p-tawada  { border-top: 4px solid #ef6c00; }
     .task-person-card.p-sugita  { border-top: 4px solid #ad1457; }
+    .task-person-card.p-shimabukuro { border-top: 4px solid #00897b; }
     .task-person-card.p-all     { border-top: 4px solid #78786f; }
     .task-person-name {
       font-size: 14px;
@@ -311,8 +314,15 @@
     <dl class="meta-grid">
       <dt>日時</dt><dd>2026年8月4日（火）19:00〜20:00頃</dd>
       <dt>開催形式</dt><dd>オンライン（Google Meet）</dd>
-      <dt>議事録作成</dt><dd>漢那宗貴</dd>
-      <dt>出席者</dt><dd>漢那宗貴・多和田真淳・杉田君恵・杉田和隆・島袋悟（島袋農園）・新垣裕一（代表・途中参加）</dd>
+      <dt>議事録作成</dt><dd><span class="person p-kanna"><span class="dot"></span>漢那宗貴</span></dd>
+      <dt>出席者</dt><dd>
+        <span class="person p-kanna"><span class="dot"></span>漢那宗貴</span>
+        <span class="person p-tawada"><span class="dot"></span>多和田真淳</span>
+        <span class="person p-sugita"><span class="dot"></span>杉田君恵</span>
+        <span class="person p-sugita"><span class="dot"></span>杉田和隆</span>
+        <span class="person p-shimabukuro"><span class="dot"></span>島袋悟（島袋農園）</span>
+        <span class="person p-aragaki"><span class="dot"></span>新垣裕一（代表・途中参加）</span>
+      </dd>
     </dl>
   </header>
 
@@ -459,13 +469,13 @@
         <p class="agenda-num">議題 1</p>
         <h3 class="agenda-title">Instagram運用の引き継ぎ</h3>
         <div class="speaker-block">
-          <p class="speaker-name">杉田君恵</p>
+          <p class="speaker-name"><span class="person p-sugita"><span class="dot"></span>杉田君恵</span></p>
           <ul class="detail-list">
             <li>ログイン権限を引き継ぎ、前回の体験塾で1回投稿を実施したことを報告</li>
           </ul>
         </div>
         <div class="speaker-block">
-          <p class="speaker-name">漢那</p>
+          <p class="speaker-name"><span class="person p-kanna"><span class="dot"></span>漢那</span></p>
           <ul class="detail-list">
             <li>メンバー内で投稿への「いいね」を積極的に行うことを提案。了承された</li>
           </ul>
@@ -486,7 +496,7 @@
         <p class="agenda-num">議題 2</p>
         <h3 class="agenda-title">駐車場境界の補修（黒い木製杭の視認性問題）</h3>
         <div class="speaker-block">
-          <p class="speaker-name">漢那</p>
+          <p class="speaker-name"><span class="person p-kanna"><span class="dot"></span>漢那</span></p>
           <ul class="detail-list">
             <li>新垣裕一さんが補修を担当する予定だが、現場での実施はまだ行われていないことを確認</li>
             <li>具体的な日程は新垣裕一さんに別途確認することとした</li>
@@ -501,7 +511,7 @@
         <p class="agenda-num">議題 3</p>
         <h3 class="agenda-title">契約書関連</h3>
         <div class="speaker-block">
-          <p class="speaker-name">漢那</p>
+          <p class="speaker-name"><span class="person p-kanna"><span class="dot"></span>漢那</span></p>
           <ul class="detail-list">
             <li>自動更新条項の改定について、リーガルチェック等もあり、改定の要否・タイミングは新垣代表と引き続き協議する（保留中）</li>
           </ul>
@@ -515,7 +525,7 @@
           </ul>
         </div>
         <div class="speaker-block">
-          <p class="speaker-name">多和田</p>
+          <p class="speaker-name"><span class="person p-tawada"><span class="dot"></span>多和田</span></p>
           <ul class="detail-list">
             <li>運用ガイドは現行2025年版。10月の新年度開始に合わせて2026年版を作成する意向を共有（遅延の可能性についても共有済み）</li>
           </ul>
@@ -529,7 +539,7 @@
         <p class="agenda-num">議題 4</p>
         <h3 class="agenda-title">伊是名さん・福元さんの価格変更に関する件</h3>
         <div class="speaker-block">
-          <p class="speaker-name">漢那</p>
+          <p class="speaker-name"><span class="person p-kanna"><span class="dot"></span>漢那</span></p>
           <ul class="detail-list">
             <li>前回議事録で決定済みの内容に変わりなしと確認</li>
             <li>比嘉さんについては現状回復が完了済み。農業研修生育成プログラムへ移行したことを報告</li>
@@ -544,7 +554,7 @@
         <p class="agenda-num">議題 5</p>
         <h3 class="agenda-title">支払いシステム移行（ツクツク → はるまーい）</h3>
         <div class="speaker-block">
-          <p class="speaker-name">漢那</p>
+          <p class="speaker-name"><span class="person p-kanna"><span class="dot"></span>漢那</span></p>
           <ul class="detail-list">
             <li>移行はほぼ完了。初美さんが事務対応を実施している</li>
             <li>サブスクリプション決済に一時不具合があったが、真栄平さん（システム開発）により修正済みで、現在は正常稼働している</li>
@@ -582,13 +592,13 @@
         <p class="agenda-num">議題 7</p>
         <h3 class="agenda-title">会員台帳・受講生の状況確認</h3>
         <div class="speaker-block">
-          <p class="speaker-name">多和田</p>
+          <p class="speaker-name"><span class="person p-tawada"><span class="dot"></span>多和田</span></p>
           <ul class="detail-list">
             <li>台帳上には4名分しか反映されていないが、実際は10名在籍していることが判明</li>
           </ul>
         </div>
         <div class="speaker-block">
-          <p class="speaker-name">漢那</p>
+          <p class="speaker-name"><span class="person p-kanna"><span class="dot"></span>漢那</span></p>
           <ul class="detail-list">
             <li>最新情報の反映状況を漢那初美さんに確認・共有を依頼することで合意</li>
           </ul>
@@ -602,7 +612,7 @@
         <p class="agenda-num">議題 8</p>
         <h3 class="agenda-title">上村みどりさんの退会対応</h3>
         <div class="speaker-block">
-          <p class="speaker-name">漢那</p>
+          <p class="speaker-name"><span class="person p-kanna"><span class="dot"></span>漢那</span></p>
           <ul class="detail-list">
             <li>未精算チケットは購入済みと確認</li>
             <li>現状回復の対応・費用負担フロー（本人が直接依頼するのか、事務局を介するのか）が不明確であり、漢那初美さん・磯部さんへの確認が必要と判断</li>
@@ -617,7 +627,7 @@
         <p class="agenda-num">議題 9</p>
         <h3 class="agenda-title">体験塾公式LINEの管理体制</h3>
         <div class="speaker-block">
-          <p class="speaker-name">漢那</p>
+          <p class="speaker-name"><span class="person p-kanna"><span class="dot"></span>漢那</span></p>
           <ul class="detail-list">
             <li>公式LINE運用スタッフとして参加済み（対応完了）</li>
           </ul>
@@ -631,7 +641,7 @@
         <p class="agenda-num">議題 10</p>
         <h3 class="agenda-title">新規募集（チラシ配布）</h3>
         <div class="speaker-block">
-          <p class="speaker-name">漢那</p>
+          <p class="speaker-name"><span class="person p-kanna"><span class="dot"></span>漢那</span></p>
           <ul class="detail-list">
             <li>新規募集はポスティングでの実施を予定</li>
             <li>配布内容・タイミングなど詳細については、8月17日の次回ミーティングまでに各自アイデアを持ち寄り、その場で決定することで合意</li>
