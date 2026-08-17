@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>議事録 2026年8月17日｜はるさー体験塾</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Noto Sans CJK JP", "Noto Sans JP", "Hiragino Sans", "Yu Gothic UI", sans-serif;
+      font-size: 15px;
+      line-height: 1.8;
+      color: #2c2c2c;
+      background: #f5f5f0;
+    }
+    .wrapper {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* ヘッダー */
+    .doc-header {
+      background: linear-gradient(135deg, #2e7d32 0%, #43a047 100%);
+      color: #fff;
+      border-radius: 12px;
+      padding: 32px 36px 28px;
+      margin-bottom: 32px;
+    }
+    .doc-header .org-name {
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      opacity: 0.85;
+      margin-bottom: 6px;
+    }
+    .doc-header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 8px 24px;
+      font-size: 13px;
+      opacity: 0.92;
+    }
+    .meta-grid dt { font-weight: 600; }
+    .meta-grid dd { margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+
+    /* セクション共通 */
+    section { margin-bottom: 28px; }
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      background: #388e3c;
+      border-radius: 6px;
+      padding: 7px 16px;
+      margin-bottom: 14px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    /* 決定事項 */
+    .decision-list {
+      list-style: none;
+      counter-reset: decision;
+    }
+    .decision-list li {
+      counter-increment: decision;
+      display: flex;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .decision-list li:last-child { border-bottom: none; }
+    .decision-list li::before {
+      content: counter(decision);
+      min-width: 26px;
+      height: 26px;
+      background: #43a047;
+      color: #fff;
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* アクションアイテム */
+    .action-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    .action-table th {
+      background: #e8f5e9;
+      color: #2e7d32;
+      font-weight: 700;
+      padding: 9px 12px;
+      text-align: left;
+      border-bottom: 2px solid #a5d6a7;
+    }
+    .action-table td {
+      padding: 9px 12px;
+      border-bottom: 1px solid #f0f0f0;
+      vertical-align: top;
+    }
+    .action-table tr:last-child td { border-bottom: none; }
+    .badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .badge-done  { background: #c8e6c9; color: #1b5e20; }
+    .badge-next  { background: #fff9c4; color: #f57f17; }
+    .badge-long  { background: #e3f2fd; color: #0d47a1; }
+    .badge-free  { background: #f3e5f5; color: #4a148c; }
+
+    /* 議題詳細 */
+    .agenda-block { margin-bottom: 20px; }
+    .agenda-num {
+      font-size: 13px;
+      color: #43a047;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .agenda-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1b5e20;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #a5d6a7;
+    }
+    .speaker-block { margin-bottom: 12px; }
+    .speaker-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #388e3c;
+      margin-bottom: 4px;
+    }
+    ul.detail-list { list-style: none; padding: 0; }
+    ul.detail-list li {
+      padding: 4px 0 4px 18px;
+      position: relative;
+    }
+    ul.detail-list li::before {
+      content: "・";
+      position: absolute;
+      left: 0;
+      color: #66bb6a;
+    }
+    .sub-list {
+      list-style: none;
+      padding-left: 18px;
+      margin-top: 4px;
+    }
+    .sub-list li {
+      padding: 3px 0 3px 16px;
+      position: relative;
+      font-size: 14px;
+      color: #444;
+    }
+    .sub-list li::before {
+      content: "―";
+      position: absolute;
+      left: 0;
+      color: #a5d6a7;
+    }
+    .note {
+      font-size: 13px;
+      color: #777;
+      margin-bottom: 12px;
+    }
+    hr.divider {
+      border: none;
+      border-top: 1px solid #f0f0f0;
+      margin: 20px 0;
+    }
+
+    /* 担当者カラー */
+    .person {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 3px 10px 3px 4px;
+      border-radius: 20px;
+    }
+    .person .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .p-kanna     { background: #e8f5e9; color: #1b5e20; }
+    .p-kanna .dot     { background: #2e7d32; }
+    .p-aragaki   { background: #e3f2fd; color: #0d47a1; }
+    .p-aragaki .dot   { background: #1565c0; }
+    .p-tawada    { background: #fff3e0; color: #8a4b00; }
+    .p-tawada .dot    { background: #ef6c00; }
+    .p-sugita    { background: #fce4ec; color: #880e4f; }
+    .p-sugita .dot    { background: #ad1457; }
+    .p-shimabukuro { background: #e0f2f1; color: #004d40; }
+    .p-shimabukuro .dot { background: #00897b; }
+    .p-all       { background: #f0f0ec; color: #444442; }
+    .p-all .dot       { background: #78786f; }
+
+    /* ステータスバッジ */
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .s-todo     { background: #ffebee; color: #b71c1c; }
+    .s-progress { background: #e3f2fd; color: #0d47a1; }
+    .s-urgent   { background: #fff3e0; color: #c1440e; }
+    .s-done     { background: #e8f5e9; color: #1b5e20; }
+
+    /* タスクボード */
+    .task-board {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    .task-person-card {
+      background: #fafaf7;
+      border: 1px solid #e6e6de;
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .task-person-card.p-kanna   { border-top: 4px solid #2e7d32; }
+    .task-person-card.p-aragaki { border-top: 4px solid #1565c0; }
+    .task-person-card.p-tawada  { border-top: 4px solid #ef6c00; }
+    .task-person-card.p-sugita  { border-top: 4px solid #ad1457; }
+    .task-person-card.p-shimabukuro { border-top: 4px solid #00897b; }
+    .task-person-card.p-all     { border-top: 4px solid #78786f; }
+    .task-person-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: #2c2c2c;
+      margin-bottom: 10px;
+    }
+    .task-item {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 13px;
+      color: #3a3a3a;
+      padding: 6px 0;
+      border-bottom: 1px dashed #e2e2da;
+    }
+    .task-item:last-child { border-bottom: none; }
+    .task-item .task-label { flex: 1; line-height: 1.5; }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      font-size: 12px;
+      color: #777;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid #f0f0f0;
+    }
+    .legend span { display: inline-flex; align-items: center; gap: 5px; }
+    .legend .dot { width: 8px; height: 8px; border-radius: 50%; }
+
+    /* 次回MTG・確認事項 */
+    .next-meeting {
+      background: #e8f5e9;
+      border-left: 4px solid #43a047;
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      font-size: 15px;
+    }
+    .next-meeting strong { color: #2e7d32; }
+
+    /* フッター */
+    footer {
+      text-align: center;
+      font-size: 12px;
+      color: #aaa;
+      margin-top: 48px;
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- ヘッダー -->
+  <header class="doc-header">
+    <p class="org-name">はるさー体験塾</p>
+    <h1>定例MTG　議事録</h1>
+    <dl class="meta-grid">
+      <dt>日時</dt><dd>2026年8月17日（月）19:00〜20:20頃</dd>
+      <dt>開催形式</dt><dd>オンライン（Google Meet）／今回よりNotta文字起こしツール併用</dd>
+      <dt>議事録作成</dt><dd><span class="person p-kanna"><span class="dot"></span>漢那宗貴</span></dd>
+      <dt>出席者</dt><dd>
+        <span class="person p-kanna"><span class="dot"></span>漢那宗貴</span>
+        <span class="person p-tawada"><span class="dot"></span>多和田真淳（途中から音声のみ）</span>
+        <span class="person p-shimabukuro"><span class="dot"></span>島袋悟（島袋農園）</span>
+        <span class="person p-sugita"><span class="dot"></span>杉田君恵</span>
+        <span class="person p-sugita"><span class="dot"></span>杉田和隆</span>
+      </dd>
+      <dt>欠席</dt><dd><span class="person p-aragaki"><span class="dot"></span>新垣裕一（代表）</span></dd>
+    </dl>
+  </header>
+
+  <!-- タスクボード -->
+  <section>
+    <h2 class="section-title">🎯 タスクボード（担当者別）</h2>
+    <div class="card">
+      <div class="task-board">
+
+        <div class="task-person-card p-kanna">
+          <p class="task-person-name"><span class="person p-kanna"><span class="dot"></span>漢那</span></p>
+          <div class="task-item"><span class="task-label">契約書関連の対応（新垣代表と相談）</span><span class="status s-todo">未着手</span></div>
+          <div class="task-item"><span class="task-label">駐車場杭の再利用可否を検討</span><span class="status s-todo">未着手</span></div>
+          <div class="task-item"><span class="task-label">伊是名さんの支払いプラン変更案を新垣代表に相談</span><span class="status s-todo">未着手</span></div>
+          <div class="task-item"><span class="task-label">9月末のチラシポスティング準備</span><span class="status s-progress">進行中</span></div>
+        </div>
+
+        <div class="task-person-card p-sugita">
+          <p class="task-person-name"><span class="person p-sugita"><span class="dot"></span>杉田君恵</span></p>
+          <div class="task-item"><span class="task-label">看板QRステッカーの発注可否を新垣裕一さんに確認</span><span class="status s-todo">未着手</span></div>
+          <div class="task-item"><span class="task-label">チラシデザインを実写真ベースにリニューアル</span><span class="status s-progress">進行中</span></div>
+        </div>
+
+        <div class="task-person-card p-all">
+          <p class="task-person-name"><span class="person p-all"><span class="dot"></span>全員</span></p>
+          <div class="task-item"><span class="task-label">次回ミーティング日程（9/4 or 9/7）をLINEで確定</span><span class="status s-todo">未着手</span></div>
+        </div>
+
+      </div>
+      <div class="legend">
+        <span><span class="dot" style="background:#b71c1c"></span>未着手＝まだ手をつけていない</span>
+        <span><span class="dot" style="background:#0d47a1"></span>進行中＝取り組み中</span>
+        <span><span class="dot" style="background:#c1440e"></span>要対応＝期限が近く優先度高め</span>
+        <span><span class="dot" style="background:#1b5e20"></span>完了＝対応済み</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 決定事項 -->
+  <section>
+    <h2 class="section-title">決定事項</h2>
+    <div class="card">
+      <ol class="decision-list">
+        <li>駐車場境界杭の設置は完了。今週土曜日に既存の古い杭を撤去予定（廃材は太い部分を再利用できないか検討）</li>
+        <li>会員台帳の人数不一致は解消し、年度別実績シートへの反映が完了</li>
+        <li>上村みどりさん（南城圃場）は7・8月分の支払いを受け、8月末で退会予定と確認</li>
+        <li>契約書関連（更新時の契約書再発行の要否等）は、対応期限を8月31日と設定。漢那が新垣代表と相談しながら進める</li>
+        <li>看板QRコードのステッカーは「ポスター印刷（シール）光沢塩ビ B3」税込1,641円（送料無料）の候補が見つかった。新垣裕一さんに発注可否を確認する</li>
+        <li>伊是名さんの支払い方法変更（4ヶ月一括→毎月払い）について、初回4ヶ月は必須継続とし、5ヶ月目以降は「毎月払い」「4ヶ月まとめ払い（割引）」の選択制にするアイデアが出た。さらに年払いプランもありという意見も出た（Netflixなど IT系サブスクサービスのような支払い体系をイメージ）。金額の詳細は新垣代表と相談のうえ決定</li>
+        <li>照屋さんの解約対応：9月末解約希望を確認済み、初美さんに共有済み</li>
+        <li>新規募集チラシは11月の植え付けを目指し、9月末にポスティングすることで決定</li>
+        <li>チラシのデザインは現行のイラスト版から、実際の写真を使ったものへ杉田君恵さんがリニューアル</li>
+        <li>チラシの内容は支払いプランの詳細までは書かず、「お得なプランをご用意」程度に留め、公式LINEへ誘導する方針</li>
+        <li>次回ミーティングは9月4日または9月7日の週で調整（詳細はLINEで連絡）</li>
+        <li>コミュニティ感を高めるアイデアとして、島袋農園との合同収穫体験イベント等が話題に上がった（決定事項ではなく意見交換）</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- アクションアイテム -->
+  <section>
+    <h2 class="section-title">アクションアイテム</h2>
+    <div class="card">
+      <table class="action-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>担当</th>
+            <th>内容</th>
+            <th>状況</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><span class="person p-kanna"><span class="dot"></span>漢那</span></td>
+            <td>契約書関連の対応（新垣代表と相談）を8月31日までに完了</td>
+            <td><span class="status s-todo">未着手</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><span class="person p-kanna"><span class="dot"></span>漢那</span></td>
+            <td>撤去する駐車場杭の再利用可否を検討</td>
+            <td><span class="status s-todo">未着手</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><span class="person p-sugita"><span class="dot"></span>杉田君恵</span></td>
+            <td>看板QRステッカー（光沢塩ビB3 1,641円）の発注可否を新垣裕一さんに確認</td>
+            <td><span class="status s-todo">未着手</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><span class="person p-kanna"><span class="dot"></span>漢那</span></td>
+            <td>伊是名さんの支払いプラン変更案を新垣代表に相談</td>
+            <td><span class="status s-todo">未着手</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><span class="person p-sugita"><span class="dot"></span>杉田君恵</span></td>
+            <td>チラシデザインを実写真ベースにリニューアル</td>
+            <td><span class="status s-progress">進行中</span></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><span class="person p-all"><span class="dot"></span>全員</span></td>
+            <td>次回ミーティング日程（9/4 or 9/7）をLINEで確定</td>
+            <td><span class="status s-todo">未着手</span></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><span class="person p-all"><span class="dot"></span>全員</span></td>
+            <td>9月末のチラシポスティングに向けた準備</td>
+            <td><span class="status s-progress">進行中</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 議題詳細 -->
+  <section>
+    <h2 class="section-title">議題詳細</h2>
+    <div class="card">
+
+      <!-- 議題1 -->
+      <div class="agenda-block">
+        <p class="agenda-num">議題 1</p>
+        <h3 class="agenda-title">前回対応完了報告</h3>
+        <div class="speaker-block">
+          <p class="speaker-name"><span class="person p-kanna"><span class="dot"></span>漢那</span></p>
+          <ul class="detail-list">
+            <li>駐車場境界杭の設置が完了したことを確認。写真も共有された</li>
+          </ul>
+        </div>
+        <div class="speaker-block">
+          <p class="speaker-name"><span class="person p-sugita"><span class="dot"></span>杉田農園（和隆さん＆君恵さん）</span></p>
+          <ul class="detail-list">
+            <li>新垣代表からも対応完了の連絡があったことを報告。既存の古い杭は撤去が必要（撤去自体は簡単）</li>
+            <li>撤去後の処分について、折れているものはゴミとして処分、折れていない太い部分は再利用できないか検討したいと発言</li>
+          </ul>
+        </div>
+        <div class="speaker-block">
+          <p class="speaker-name"><span class="person p-kanna"><span class="dot"></span>漢那</span></p>
+          <ul class="detail-list">
+            <li>今週土曜日に杭を撤去予定と共有</li>
+            <li>会員台帳の人数不一致について、初美さんに確認してもらい、年度別実績シートへ全て反映済みであることを報告</li>
+            <li>上村みどりさん（南城圃場）について、初美さんに確認したところ、7・8月分の支払いを受けて8月末で退会予定であることを共有</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- 議題2 -->
+      <div class="agenda-block">
+        <p class="agenda-num">議題 2</p>
+        <h3 class="agenda-title">契約書関連</h3>
+        <div class="speaker-block">
+          <p class="speaker-name"><span class="person p-kanna"><span class="dot"></span>漢那</span></p>
+          <ul class="detail-list">
+            <li>契約書関連の対応について、自分がボールを握ったまま着手できていない状況を共有し、緊急度について意見を求めた</li>
+          </ul>
+        </div>
+        <div class="speaker-block">
+          <p class="speaker-name"><span class="person p-sugita"><span class="dot"></span>杉田農園（和隆さん＆君恵さん）</span></p>
+          <ul class="detail-list">
+            <li>更新時に契約書を渡す運用にするかどうかが論点。契約は現状1年更新だが、更新のたびに契約書を渡す運用にはなっていないと指摘</li>
+            <li>自動更新にして初回契約時にしか契約書を渡さない、という整理でよいのではという意見。関東の賃貸では更新のたびに手続きがある例もあるが、地域や業界の慣習の違いもあるのではと補足</li>
+          </ul>
+        </div>
+        <div class="speaker-block">
+          <p class="speaker-name"><span class="person p-kanna"><span class="dot"></span>漢那</span></p>
+          <ul class="detail-list">
+            <li>今日のうちにチラシポスティングの打ち合わせも進めたいため、契約書関連は早めに片付けたいと発言</li>
+            <li>新垣代表と相談しながら進めることとし、期限を8月31日と設定</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- 議題3 -->
+      <div class="agenda-block">
+        <p class="agenda-num">議題 3</p>
+        <h3 class="agenda-title">看板QRコード差し替えの進捗</h3>
+        <div class="speaker-block">
+          <p class="speaker-name"><span class="person p-sugita"><span class="dot"></span>杉田農園（和隆さん＆君恵さん）</span></p>
+          <ul class="detail-list">
+            <li>看板QRコード用ステッカーの価格調査を実施し、オープンチャットで共有済みであることを報告</li>
+            <li>候補として「ポスター印刷（シール）光沢塩ビ B3」税込1,641円（送料無料）を提示</li>
+            <li>那覇のアクセアでも対応可能だがやや割高との比較情報も共有</li>
+          </ul>
+        </div>
+        <div class="speaker-block">
+          <p class="speaker-name"><span class="person p-kanna"><span class="dot"></span>漢那</span></p>
+          <ul class="detail-list">
+            <li>予算面もあるため、新垣裕一さんに確認して発注可否を判断する方針で合意</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- 議題4 -->
+      <div class="agenda-block">
+        <p class="agenda-num">議題 4</p>
+        <h3 class="agenda-title">伊是名さんの支払い方法変更について</h3>
+        <div class="speaker-block">
+          <p class="speaker-name"><span class="person p-kanna"><span class="dot"></span>漢那</span></p>
+          <ul class="detail-list">
+            <li>現在4ヶ月分一括払いとなっている伊是名さんから、毎月払いへの変更希望があったことを共有（初美さん経由）。対応方針の検討を提起</li>
+          </ul>
+        </div>
+        <div class="speaker-block">
+          <p class="speaker-name"><span class="person p-sugita"><span class="dot"></span>杉田農園（和隆さん＆君恵さん）</span></p>
+          <ul class="detail-list">
+            <li>過去にリンク決済（毎月払い）を採用していた時期があったが、支払い漏れや請求メールの見落としなどのトラブルが多く、事務負担軽減のため4ヶ月一括の現行運用に変更した経緯を共有</li>
+            <li>一括払いにすることで、途中でうねたて・畝立てなど農家側の作業投下後にすぐ離脱されるリスクを抑える狙いもあったと補足</li>
+          </ul>
+        </div>
+        <div class="speaker-block">
+          <p class="speaker-name"><span class="person p-tawada"><span class="dot"></span>多和田</span> ／ <span class="person p-shimabukuro"><span class="dot"></span>島袋</span></p>
+          <ul class="detail-list">
+            <li>「1ヶ月だけ試してやめる」こと自体は自然な行動でもあり、一定数は許容すべきという意見も出た</li>
+          </ul>
+        </div>
+        <div class="speaker-block">
+          <p class="speaker-name"><span class="person p-kanna"><span class="dot"></span>漢那</span></p>
+          <ul class="detail-list">
+            <li>案として、初回4ヶ月は必須で継続とし、5ヶ月目以降を「毎月払い」または「4ヶ月まとめ払い（割引あり）」の選択制にするアイデアを提示</li>
+            <li>さらに、年払いプランを設ける案も出た。Amazon PrimeやNetflixなど、IT系サブスクリプションサービスのような「年額を払えばお得になる」支払い体系をイメージした発言があった</li>
+            <li>年額プランの場合、途中解約の返金可否についても整理が必要という指摘があった</li>
+            <li>金額の最終決定は新垣代表と相談のうえ進めることで合意</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- 議題5 -->
+      <div class="agenda-block">
+        <p class="agenda-num">議題 5</p>
+        <h3 class="agenda-title">栽培方針・資材に関する質問（多和田さんより）</h3>
+        <div class="speaker-block">
+          <p class="speaker-name"><span class="person p-tawada"><span class="dot"></span>多和田</span></p>
+          <ul class="detail-list">
+            <li>体験塾で使用が許可されている資材の範囲（農薬・肥料）について質問</li>
+          </ul>
+        </div>
+        <div class="speaker-block">
+          <p class="speaker-name"><span class="person p-sugita"><span class="dot"></span>杉田農園（和隆さん＆君恵さん）</span></p>
+          <ul class="detail-list">
+            <li>動物性資材、化学農薬、化学肥料は不使用というルールで案内していると回答。牡蠣殻（オスカルシウム）等は推奨している一方、腐敗する動物性堆肥（牛糞等）は都度使用しないよう説明していると補足</li>
+            <li>有機JAS適用資材という表現は使用していないことを確認</li>
+          </ul>
+        </div>
+        <div class="speaker-block">
+          <p class="speaker-name"><span class="person p-tawada"><span class="dot"></span>多和田</span></p>
+          <ul class="detail-list">
+            <li>運営側（農家）自身が栽培することがあるか質問</li>
+          </ul>
+        </div>
+        <div class="speaker-block">
+          <p class="speaker-name"><span class="person p-sugita"><span class="dot"></span>杉田農園（和隆さん＆君恵さん）</span></p>
+          <ul class="detail-list">
+            <li>過去に「共同栽培」としてニンジン・タマネギ・ジャガイモを植えて収穫祭を行ったことがあるが、手が回らず現在は実施していないと回答</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- 議題6 -->
+      <div class="agenda-block">
+        <p class="agenda-num">議題 6</p>
+        <h3 class="agenda-title">照屋さんの解約対応状況</h3>
+        <div class="speaker-block">
+          <p class="speaker-name"><span class="person p-kanna"><span class="dot"></span>漢那</span></p>
+          <ul class="detail-list">
+            <li>照屋さんの9月末解約希望について、初美さんへ共有済みであることを確認</li>
+          </ul>
+        </div>
+        <div class="speaker-block">
+          <p class="speaker-name"><span class="person p-shimabukuro"><span class="dot"></span>島袋</span> ／ <span class="person p-sugita"><span class="dot"></span>杉田農園</span></p>
+          <ul class="detail-list">
+            <li>認識合わせのみで、特に異論なく確認完了</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- 議題7 -->
+      <div class="agenda-block">
+        <p class="agenda-num">議題 7</p>
+        <h3 class="agenda-title">新規募集チラシポスティングの詳細決定</h3>
+        <div class="speaker-block">
+          <p class="speaker-name"><span class="person p-kanna"><span class="dot"></span>漢那</span></p>
+          <ul class="detail-list">
+            <li>前回議事録の内容を踏まえ、配布内容・タイミングを本日決定したい旨を提起</li>
+          </ul>
+        </div>
+        <div class="speaker-block">
+          <p class="speaker-name"><span class="person p-sugita"><span class="dot"></span>杉田農園（和隆さん＆君恵さん）</span></p>
+          <ul class="detail-list">
+            <li>昨年10月に植え付けたところやや早すぎた感触があったため、11月植え付けを目安とすることを提案</li>
+          </ul>
+        </div>
+        <div class="speaker-block">
+          <p class="speaker-name"><span class="person p-kanna"><span class="dot"></span>漢那</span></p>
+          <ul class="detail-list">
+            <li>11月植え付けを目指すなら、10月いっぱいで申込を集める逆算で、9月末にポスティングすることで合意</li>
+          </ul>
+        </div>
+        <div class="speaker-block">
+          <p class="speaker-name"><span class="person p-sugita"><span class="dot"></span>杉田農園（和隆さん＆君恵さん）</span></p>
+          <ul class="detail-list">
+            <li>チラシ内容について、支払いプランの詳細までは書かず、公式LINEに誘導してリッチメニューから案内する方が、プラン変更があっても対応しやすいと提案</li>
+          </ul>
+        </div>
+        <div class="speaker-block">
+          <p class="speaker-name"><span class="person p-kanna"><span class="dot"></span>漢那</span></p>
+          <ul class="detail-list">
+            <li>「お得なプラン、ご用意しております」程度の訴求に留め、詳細は公式LINEでという方針に合意</li>
+            <li>期間限定の割引訴求（チラシを見た方限定で初回支払いが◯%オフ、など）のアイデアも共有</li>
+          </ul>
+        </div>
+        <div class="speaker-block">
+          <p class="speaker-name"><span class="person p-sugita"><span class="dot"></span>杉田農園（和隆さん＆君恵さん）</span></p>
+          <ul class="detail-list">
+            <li>チラシは現行のイラスト版から、実際の写真を使ったデザインへリニューアルすることを提案し、君恵さんが担当することに</li>
+            <li>Canva上のデータを画面共有しながら、不要なページ・古い表記（旧「デジハル」表記等）の整理も進める意向を共有</li>
+          </ul>
+        </div>
+        <div class="speaker-block">
+          <p class="speaker-name"><span class="person p-kanna"><span class="dot"></span>漢那</span></p>
+          <ul class="detail-list">
+            <li>次回ミーティング日程は9月4日または9月7日の週で調整することとし、詳細はLINEで連絡することに</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- 議題8 -->
+      <div class="agenda-block">
+        <p class="agenda-num">議題 8</p>
+        <h3 class="agenda-title">コミュニティ感醸成のアイデア共有（自由討議）</h3>
+        <div class="speaker-block">
+          <p class="speaker-name"><span class="person p-kanna"><span class="dot"></span>漢那</span></p>
+          <ul class="detail-list">
+            <li>単に栽培指導だけでなく、コミュニティとしての「楽しさ」「サークル感」を高める必要性について問題提起</li>
+          </ul>
+        </div>
+        <div class="speaker-block">
+          <p class="speaker-name"><span class="person p-sugita"><span class="dot"></span>杉田農園（和隆さん＆君恵さん）</span></p>
+          <ul class="detail-list">
+            <li>現状、常連の受講生同士では自然発生的に仲良くなっている例があるが、農家側から積極的に和気あいあいとした場を提供する余裕がないのが実情と共有</li>
+          </ul>
+        </div>
+        <div class="speaker-block">
+          <p class="speaker-name"><span class="person p-kanna"><span class="dot"></span>漢那</span> ／ <span class="person p-shimabukuro"><span class="dot"></span>島袋</span></p>
+          <ul class="detail-list">
+            <li>島袋農園との合同収穫体験イベントなど、他の農家との連携イベントを行うアイデアが挙がった。規定上の制約は特にないことを確認</li>
+            <li>あくまでアイデア共有の段階であり、正式な決定事項ではない</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 確認事項 -->
+  <section>
+    <h2 class="section-title">【確認事項】</h2>
+    <div class="card">
+      <ul class="detail-list">
+        <li>「サンタさん」という表記は「島袋（悟）さん」の誤認識と判断しました（？）</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 次回MTG -->
+  <section>
+    <h2 class="section-title">次回MTG</h2>
+    <div class="next-meeting">
+      <strong>次回：</strong>2026年9月4日または9月7日の週（詳細はLINEで案内）
+    </div>
+  </section>
+
+  <footer>
+    <p>はるさー体験塾 &copy; 2026　／　作成：漢那宗貴</p>
+  </footer>
+
+</div>
+</body>
+</html>
